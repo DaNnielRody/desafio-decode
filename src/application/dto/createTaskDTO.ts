@@ -13,7 +13,7 @@ export const createTaskSchema = z.object({
 export interface CreateTaskDTO {
   title: string;
   description?: string;
-  status?: string;
+  status?: boolean;
   dueDate?: Date;
   priority?: string;
   assigneeUser: User;

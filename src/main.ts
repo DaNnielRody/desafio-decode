@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import { bootstrap } from '@/shared/config/db';
+import { setupRoutes } from '@/shared/config/routes';
 import '@/shared/config/env';
 
 const server = Fastify({
@@ -22,6 +23,8 @@ const start = async () => {
 
     await server.after();
 
+    await setupRoutes(server);
+
     server.get('/ping', async () => {
       return { pong: 'it worked!' };
     });
@@ -33,6 +36,15 @@ const start = async () => {
 
     server.log.info(`Server is running on port ${port}`);
     server.log.info('GET /ping - Health check');
+    server.log.info('POST /auth/login - User login');
+    server.log.info('POST /auth/register - User registration');
+    server.log.info('POST /users - Create user');
+    server.log.info('GET /users - Get user profile');
+    server.log.info('PATCH /users/:id - Update user');
+    server.log.info('POST /tasks - Create task');
+    server.log.info('GET /tasks - Get tasks');
+    server.log.info('PATCH /tasks/:id - Update task');
+    server.log.info('DELETE /tasks/:id - Delete task');
   } catch (err) {
     server.log.error(err);
     process.exit(1);

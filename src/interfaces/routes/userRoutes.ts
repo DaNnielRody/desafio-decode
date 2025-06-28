@@ -6,14 +6,14 @@ export const userRoutes = (fastify: FastifyInstance, userController: UserControl
   fastify.addHook('preHandler', authenticate);
 
   fastify.post('/', {
-    handler: userController.create.bind(UserController),
+    handler: userController.create.bind(userController),
   });
 
   fastify.get('/', {
-    handler: userController.get.bind(UserController),
+    handler: userController.get.bind(userController),
   });
 
   fastify.patch('/:id', {
-    handler: userController.update.bind(UserController),
+    handler: userController.update.bind(userController),
   });
 };

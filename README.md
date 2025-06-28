@@ -130,6 +130,10 @@ docker-compose down
 
 A aplicação estará disponível em: **http://localhost:3333**
 
+### 📚 Documentação da API
+
+A documentação interativa da API estará disponível em: **http://localhost:3333/docs**
+
 ### 💻 Executando em Desenvolvimento Local
 
 ```bash

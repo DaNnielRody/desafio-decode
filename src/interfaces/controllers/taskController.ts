@@ -32,7 +32,7 @@ export class TaskController {
       const createTaskDTO: CreateTaskDTO = {
         title: validatedData.title,
         description: validatedData.description,
-        status: validatedData.status?.toString(),
+        status: validatedData.status,
         dueDate: validatedData.dueDate ? new Date(validatedData.dueDate) : undefined,
         priority: validatedData.priority,
         assigneeUser: assigneeUser!,
@@ -116,7 +116,7 @@ export class TaskController {
       }
 
       if (validatedData.status !== undefined) {
-        updateTaskDTO.status = validatedData.status.toString();
+        updateTaskDTO.status = validatedData.status;
       }
 
       if (validatedData.dueDate) {
