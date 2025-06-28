@@ -63,7 +63,7 @@ export class TaskController {
 
   async getAll(request: FastifyRequest, reply: FastifyReply) {
     try {
-      const currentUserId = (request as any).user.id;
+      const currentUserId = (request as any).user.userId;
 
       const queryParams = getTaskFiltersSchema.parse(request.query);
 
@@ -99,11 +99,24 @@ export class TaskController {
     try {
       const { id } = taskParamsSchema.parse(request.params);
       const validatedData = updateTaskSchema.parse(request.body);
-      const userId = (request as any).user.id;
+      const userId = (request as any).user.userId;
 
       await this.taskRepositoryValidationUseCase.validateTaskExists(id);
 
-      await this.taskRepositoryValidationUseCase.validateTaskAssignee(id, userId);
+      const task = await this.taskRepository.findById(id);
+      if (!task) {
+        return reply.status(404).send({
+          success: false,
+          message: 'Tarefa não encontrada',
+        });
+      }
+
+      if (task.assigneeUser.id !== userId) {
+        return reply.status(403).send({
+          success: false,
+          message: 'Você não tem permissão para modificar esta tarefa',
+        });
+      }
 
       const updateTaskDTO: UpdateTaskDTO = {};
 
@@ -166,11 +179,24 @@ export class TaskController {
   async delete(request: FastifyRequest, reply: FastifyReply) {
     try {
       const { id } = taskParamsSchema.parse(request.params);
-      const userId = (request as any).user.id;
+      const userId = (request as any).user.userId;
 
       await this.taskRepositoryValidationUseCase.validateTaskExists(id);
 
-      await this.taskRepositoryValidationUseCase.validateTaskAssignee(id, userId);
+      const task = await this.taskRepository.findById(id);
+      if (!task) {
+        return reply.status(404).send({
+          success: false,
+          message: 'Tarefa não encontrada',
+        });
+      }
+
+      if (task.assigneeUser.id !== userId) {
+        return reply.status(403).send({
+          success: false,
+          message: 'Você não tem permissão para deletar esta tarefa',
+        });
+      }
 
       await this.taskRepository.delete(id);
 

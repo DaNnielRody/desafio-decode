@@ -12,5 +12,5 @@ export interface GetTaskFiltersDTO {
 
 export const getTaskFiltersSchema = z.object({
   userId: z.string().uuid().optional(),
-  status: z.boolean().optional(),
+  status: z.coerce.boolean().optional(),
 });

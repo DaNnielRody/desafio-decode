@@ -40,7 +40,7 @@ const start = async () => {
     server.log.info('POST /auth/register - User registration');
     server.log.info('POST /users - Create user');
     server.log.info('GET /users - Get user profile');
-    server.log.info('PATCH /users/:id - Update user');
+    server.log.info('PATCH /users - Update user profile');
     server.log.info('POST /tasks - Create task');
     server.log.info('GET /tasks - Get tasks');
     server.log.info('PATCH /tasks/:id - Update task');

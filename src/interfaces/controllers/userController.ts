@@ -52,7 +52,7 @@ export class UserController {
 
   async get(request: FastifyRequest, reply: FastifyReply) {
     try {
-      const userId = (request as any).user.id;
+      const userId = (request as any).user.userId;
 
       const user = await this.userRepository.findById(userId);
 
@@ -79,18 +79,18 @@ export class UserController {
 
   async update(request: FastifyRequest, reply: FastifyReply) {
     try {
-      const userId = (request as any).user.id;
+      const userId = (request as any).user.userId;
       const validatedData = updateUserSchema.parse(request.body);
 
       await this.userRepositoryValidationUseCase.validateUserExists(userId);
 
       const updateUserDTO: UpdateUserDTO = {};
 
-      if (validatedData.name) {
+      if (validatedData.name !== undefined) {
         updateUserDTO.name = validatedData.name;
       }
 
-      if (validatedData.email) {
+      if (validatedData.email !== undefined) {
         const existingUser = await this.userRepository.findByEmail(validatedData.email);
         if (existingUser && existingUser.id !== userId) {
           return reply.status(400).send({
@@ -101,7 +101,7 @@ export class UserController {
         updateUserDTO.email = validatedData.email;
       }
 
-      if (validatedData.password) {
+      if (validatedData.password !== undefined) {
         updateUserDTO.password = await this.cryptoProvider.hash(validatedData.password);
       }
 

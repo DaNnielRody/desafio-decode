@@ -9,7 +9,7 @@ export class TaskRepositoryValidationUseCase {
       throw new Error('Task not found');
     }
 
-    if (task.assigneeUser.id !== userId) {
+    if (!task.assigneeUser || task.assigneeUser.id !== userId) {
       throw new Error('User is not the assignee of the task');
     }
   }

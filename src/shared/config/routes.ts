@@ -44,11 +44,7 @@ export async function setupRoutes(server: FastifyInstance) {
     userRepository,
     cryptoProvider
   );
-  const createTaskUseCase = new CreateTaskUseCase(
-    userRepositoryValidationUseCase,
-    taskRepositoryValidationUseCase,
-    taskRepository
-  );
+  const createTaskUseCase = new CreateTaskUseCase(userRepositoryValidationUseCase, taskRepository);
 
   const authController = new AuthController(authUseCase, createUserUseCase);
   const userController = new UserController(

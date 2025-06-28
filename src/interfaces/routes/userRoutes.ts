@@ -13,7 +13,7 @@ export const userRoutes = (fastify: FastifyInstance, userController: UserControl
     handler: userController.get.bind(userController),
   });
 
-  fastify.patch('/:id', {
+  fastify.patch('/', {
     handler: userController.update.bind(userController),
   });
 };

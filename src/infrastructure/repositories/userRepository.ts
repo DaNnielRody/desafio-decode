@@ -33,7 +33,17 @@ export class UserRepository implements IUserRepository {
   }
 
   async update(id: string, user: UpdateUserDTO): Promise<User | null> {
-    await this.repository.update(id, user);
+    const updateData: any = {};
+
+    if (user.name !== undefined) updateData.name = user.name;
+    if (user.email !== undefined) updateData.email = user.email;
+    if (user.password !== undefined) updateData.password = user.password;
+
+    if (Object.keys(updateData).length === 0) {
+      return await this.findById(id);
+    }
+
+    await this.repository.update(id, updateData);
     return await this.findById(id);
   }
 
