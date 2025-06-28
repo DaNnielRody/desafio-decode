@@ -328,23 +328,9 @@ docker run -p 3333:3333 --env-file .env task-api
 docker-compose -f docker-compose.yml up -d
 ```
 
-## 🤝 Contribuição
-
-1. **Fork** o projeto
-2. Crie uma **branch** para sua feature (`git checkout -b feature/AmazingFeature`)
-3. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um **Pull Request**
-
 ## 📝 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 📞 Contato
-
-Desenvolvido com ❤️ para o desafio técnico.
-
----
 
 ### 🎯 Status do Projeto
 
@@ -354,8 +340,5 @@ Desenvolvido com ❤️ para o desafio técnico.
 - ✅ CRUD de tarefas
 - ✅ Docker e Docker Compose
 - ✅ Arquitetura Clean + DDD
-- ⏳ Testes unitários (em desenvolvimento)
-- ⏳ Validações avançadas
-- ⏳ Documentação da API (Swagger)
 
 **A aplicação está funcional e atende todos os requisitos técnicos do desafio!** 🚀
